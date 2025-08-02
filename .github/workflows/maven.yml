@@ -26,6 +26,13 @@ jobs:
     - name: Run API Tests
       run: mvn clean test -Dsuite=suite -X
 
+    - name: Upload a Build Artifact
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: Logs
+        path: logs/
+
     - name: Upload test resullt
       if: always()
       uses: actions/upload-artifact@v4
