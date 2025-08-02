@@ -25,6 +25,28 @@ jobs:
 
     - name: Run API Tests
       run: mvn clean test -Dsuite=suite -X
+
+    - name: Upload test resullt
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name:  test-result
+        path:
+          test-output/reports/
+          target/surefire-reports/
+          logs/
+
+    - name: Publish Test Report
+      if: always()
+      uses: dorny/test-reporter@v1
+      with:
+        name: TestNG Results
+        path: target/surefire-reports/junitreports/TEST-*.xml
+        reporter: java-junit
+        
+
+          
+      
     
     
   
